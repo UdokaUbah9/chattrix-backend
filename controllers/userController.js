@@ -111,7 +111,6 @@ exports.getChatUsers = catchAsync(async function (req, res, next) {
 
 // Update current user profile
 exports.updateMe = catchAsync(async function (req, res, next) {
-  // Override the id param so users can only update themselves
   req.params.id = req.user.id;
 
   // Upload image to cloudinary

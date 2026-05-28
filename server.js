@@ -310,7 +310,7 @@ io.on("connection", (socket) => {
           timeLeft: 62,
           isLoading: false,
           timerId: null,
-          targetScore: gamePath === "words-strike" ? 10 : 60,
+          targetScore: gamePath === "words-strike" ? 100 : 60,
         };
 
         gameSessions[challengeId] = newSession;
