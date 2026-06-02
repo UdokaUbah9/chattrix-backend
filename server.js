@@ -22,11 +22,9 @@ const hpp = require("hpp");
 const app = express();
 
 const allowedOrigins = [
+  "https://chattrix-chat.vercel.app",
   "http://localhost:3000",
-  "https://chattrix.xyz",
-  "https://www.chattrix.xyz",
-  process.env.FRONTEND_URL,
-].filter(Boolean); // Filters out any undefined environment variables safely
+];
 
 const server = http.createServer(app);
 
@@ -611,7 +609,7 @@ const startServer = async function () {
   try {
     await connectDB();
     server.listen(PORT, function () {
-      console.log("listening...");
+      // console.log("listening...");
     });
   } catch (err) {
     process.exit(1);
