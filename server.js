@@ -21,11 +21,7 @@ const hpp = require("hpp");
 
 const app = express();
 
-const allowedOrigins = [
-  "https://chattrixfrontend.vercel.app",
-  "https://chattrix-frontend.vercel.app",
-  "http://localhost:3000",
-];
+const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL];
 
 const server = http.createServer(app);
 
@@ -610,7 +606,7 @@ const startServer = async function () {
   try {
     await connectDB();
     server.listen(PORT, function () {
-      // console.log("listening...");
+      console.log("listening...");
     });
   } catch (err) {
     process.exit(1);
