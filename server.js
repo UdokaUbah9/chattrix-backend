@@ -23,8 +23,8 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://chattrixfrontend.vercel.app",
-  "https://chattrix-frontend.vercel.app",
+  "https://chattrix-sooty.vercel.app",
+  "https://chattrix.vercel.app",
 ];
 
 const server = http.createServer(app);
