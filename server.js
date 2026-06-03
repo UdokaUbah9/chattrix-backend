@@ -22,8 +22,9 @@ const hpp = require("hpp");
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:3000",
   "https://chattrix-snowy.vercel.app",
+  "https://chattrix-git-main-udoka007.vercel.app",
+  "https://chattrix-h348yntpi-udoka007.vercel.app",
 ];
 
 const server = http.createServer(app);
