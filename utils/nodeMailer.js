@@ -33,7 +33,7 @@ module.exports = function () {
   return async function sendMail(option) {
     try {
       await resend.emails.send({
-        from: "Chattrix App", // Resend provides this default free testing email
+        from: "Chattrix App <onboarding@resend.dev>",
         to: option.email,
         subject: option.subject,
         text: option.text,
