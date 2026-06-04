@@ -1,25 +1,19 @@
 const nodemailer = require("nodemailer");
+const brevoTransport = require("nodemailer-brevo-transport");
 
 module.exports = function () {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.NODE_MAILER_GMAIL_USER,
-      pass: process.env.NODE_MAILER_GMAIL_PASS, // Make sure this is a 16-character App Password, not your normal password!
-    },
-    /* Stops Render from hanging indefinitely if connection drops */
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
-  });
+  // Configures Nodemailer to send via Brevo's HTTPS API, bypassing Render's firewall
+  const transporter = nodemailer.createTransport(
+    new brevoTransport({
+      apiKey: process.env.BREVO_API_KEY, // The long key you just copied from image_4d7a80.jpg
+    }),
+  );
 
   return async function sendMail(option) {
     await transporter
       .sendMail({
-        // Fixed: Wrapped the email environment variable in angle brackets < >
-        from: `"Chattrix App" <${process.env.NODE_MAILER_GMAIL_USER}>`,
+        // Make sure this email is exactly the one you used to register your Brevo account!
+        from: `"Chattrix App" <${process.env.BREVO_SENDER_EMAIL}>`,
         to: option.email,
         subject: option.subject,
         text: option.text,
