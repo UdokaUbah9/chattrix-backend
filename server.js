@@ -600,29 +600,40 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
-const startServer = async function () {
-  try {
-    await connectDB();
-    server.listen(PORT, function () {
-      console.log("listening...");
-    });
-  } catch (err) {
-    process.exit(1);
-  }
-};
-
+// 1. Mount your routers BEFORE anything else at the bottom
 app.use("/api/smile/v1/users", userRouter);
 app.use("/api/smile/v1/messages", messageRouter);
 app.use("/api/smile/v1/users/connections", connectionRouter);
 
-app.use(function (req, res) {
+// 2. Add an explicit Root Health Check for Pxxl's Gateway Load Balancer
+app.get("/", (req, res) => {
+  res.status(200).send("Chattrix Backend Service is Active & Healthy! 🚀");
+});
+
+// 3. Fallback catch-all for authentic bad routes
+app.use((req, res) => {
   res.status(404).json({
     status: "fail",
     message: `No route found for the path ${req.originalUrl}`,
   });
 });
 
+// 4. Error Management Wrapper
 app.use(globalErrorHandler);
+
+// 5. Initialize Server Boot Up
+const PORT = process.env.PORT || 3000;
+
+const startServer = async function () {
+  try {
+    await connectDB();
+    server.listen(PORT, function () {
+      console.log(`Server successfully listening on port ${PORT}...`);
+    });
+  } catch (err) {
+    console.error("Database connection failed:", err);
+    process.exit(1);
+  }
+};
+
 startServer();
