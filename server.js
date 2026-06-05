@@ -21,7 +21,7 @@ const hpp = require("hpp");
 
 const app = express();
 
-const allowedOrigins = ["https://chattrix-fun.vercel.app"];
+const allowedOrigins = ["https://chattrix.pxxl.click", "https://chattrix.xyz"];
 
 const server = http.createServer(app);
 
@@ -600,7 +600,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const startServer = async function () {
   try {
